@@ -2,6 +2,9 @@
 
 This is the Changelog for the Visual Studio Code Simple HTTP Server.
 
+## [1.0.2]
+- Added License
+
 ## [1.0.1]
 - Added icon
 - Removed unneeded spacer in README.md

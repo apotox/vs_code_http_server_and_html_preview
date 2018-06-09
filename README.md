@@ -39,3 +39,7 @@ This is a example of the Visual Studio Code HTML Preview.
 This is a example of the Browser HTML Preview.
 
 ![Browser Webview](https://i.imgur.com/dKUWYI8.gif)
+
+## License
+
+See Repository
