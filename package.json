@@ -6,7 +6,7 @@
 		"type": "git",
 		"url": "https://github.com/7Flixs/vs_code_http_server_and_html_preview.git"
 	},
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"publisher": "Shawn Funke",
 	"keywords": [
 		"http",
