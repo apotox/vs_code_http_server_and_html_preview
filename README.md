@@ -24,8 +24,8 @@ When editing the files they will refresh when you save the file, if other people
 
 This is a example of the Visual Studio Code HTML Preview.
 
-![Visual Studio Code Webview](https://i.imgur.com/63Z7gkn.gifv)
+![Visual Studio Code Webview](https://i.imgur.com/63Z7gkn.gif)
 
 This is a example of the Browser HTML Preview.
 
-![Browser Webview](https://i.imgur.com/dKUWYI8.gifv)
+![Browser Webview](https://i.imgur.com/dKUWYI8.gif)
