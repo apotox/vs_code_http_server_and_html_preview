@@ -9,18 +9,11 @@
 	"version": "1.0.0",
 	"publisher": "flixs",
 	"keywords": [
-		"http",
-		"html",
-		"html live",
 		"html viewer",
-		"simple http",
 		"http server",
-		"html refresh",
-		"http preview",
-		"html live viewer",
-		"html live preview",
-		"html live refresh",
-		"simple http server"
+		"html preview",
+		"html live",
+		"html live refresh"
 	],
 	"engines": {
 		"vscode": "^1.24.0"
