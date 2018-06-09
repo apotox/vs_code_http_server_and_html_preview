@@ -16,8 +16,6 @@ Press F1 and run the command ``"Simple HTTP Server: Create Simple HTTP Server"`.
 After a HTTP Server has been created, and you can open the Website in Visual Studio Code or in your Browser, both works too!
 When editing the files they will refresh when you save the file, if other people are on your website too, it'll refresh for them aswell!
 
-====
-
 # Settings
 
 `"shs.serverPort"` This is the port that the HTTP server will be running on, and the port you need to use to access your website.
