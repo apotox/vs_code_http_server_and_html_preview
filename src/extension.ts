@@ -3,9 +3,12 @@
 
 import * as vscode from 'vscode';
 import * as express from "express";
-import { Logger } from './modules/logger';
 import * as opn from "opn";
-import { Webview } from './modules/webview';
+import * as http from 'http';
+
+import { Logger } from './modules/logger';
+import { Webview, getRefreshHandler } from './modules/webview';
+import { WebSocket } from './modules/websocket';
 
 // this method is called when your extension is activated
 export function activate(context: vscode.ExtensionContext) {
@@ -13,41 +16,47 @@ export function activate(context: vscode.ExtensionContext) {
 
 	logger.log("The Simple HTTP Server extension is now active!");
 
-	const config: vscode.WorkspaceConfiguration = vscode.workspace.getConfiguration("shs");
-
-	let appHandler;
+	let server: http.Server;
+	let websocket: WebSocket;
+	const app = express();
 	const disposalCreateServer: vscode.Disposable = vscode.commands.registerCommand("shs.createServer", (): void => {
+		const config: vscode.WorkspaceConfiguration = vscode.workspace.getConfiguration("shs");
 		const serverPort: number = config.get("serverPort");
 		const serverHost: string = config.get("serverHost");
-		const path: string = `${vscode.workspace.rootPath}`;
 		const address: string = `${serverHost}:${serverPort}`
 
+		if (server) server.close();
+		server = http.createServer(app);
+
 		const webview: Webview = new Webview(address);
-		vscode.workspace.onDidSaveTextDocument((_): void => webview.refresh());
+		vscode.workspace.onDidSaveTextDocument((_): void => websocket.notifyRefresh());
 
-		if (appHandler)
-			appHandler.close();
+		if (websocket) websocket.close();
 
-		const app = express();
-		appHandler = app.listen(serverPort, serverHost, (): void => {
+		websocket = new WebSocket(server);
+
+		const mainFile: string = config.get("mainFile");
+		const path: string = `${vscode.workspace.rootPath}`;
+		app.use("/", (req, res: express.Response, next) => {
+			let url: string = req.originalUrl;
+			if (url == "/")
+				return res.send(getRefreshHandler(address, mainFile));
+
+			res.sendFile(path + url);
+		});
+
+		server.listen(serverPort, serverHost, (): void => {
 			logger.logSucess(`Server listening on '${address}'`);
 
 			vscode.window.showInformationMessage(`Simple HTTP Server running on '${address}'`, "Open in Browser", "Open in Visual Studio")
 			.then((option: string): void => {
 				if (option) {
 					if (option == "Open in Browser")
-						opn("http://" + address);
+						opn("http://" + address.replace("0.0.0.0", "127.0.0.1"));
 					else if (option == "Open in Visual Studio")
 						webview.show();
 				}
 			});
-		});
-
-		app.use("/", express.static(path + "/"));
-
-		const indexPath: string = `${path}\\${config.get("mainFile")}`
-		app.get("/", (_, res: express.Response): void => {
-			res.sendFile(indexPath);
 		});
 	});
 
