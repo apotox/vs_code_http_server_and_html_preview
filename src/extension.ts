@@ -40,7 +40,7 @@ export function activate(context: vscode.ExtensionContext) {
 		app.use("/", (req, res: express.Response, next) => {
 			let url: string = req.originalUrl;
 			if (url == "/")
-				return res.send(getRefreshHandler(address, mainFile));
+				return res.send(getRefreshHandler(mainFile));
 
 			res.sendFile(path + url);
 		});

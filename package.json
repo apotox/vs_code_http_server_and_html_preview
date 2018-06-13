@@ -6,7 +6,7 @@
 		"type": "git",
 		"url": "https://github.com/7Flixs/vs_code_http_server_and_html_preview.git"
 	},
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"publisher": "Flixs",
 	"icon": "assets/SHS.png",
 	"keywords": [

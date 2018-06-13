@@ -1,12 +1,10 @@
 
 import * as vscode from 'vscode';
 
-// <iframe src="http://${address}/${mainFile}" id="shs_website" allowTransparency="false" frameborder="0"></iframe>
-export function getRefreshHandler(address: string, mainFile: string): string {
+export function getRefreshHandler(mainFile: string): string {
 	return `
 	<iframe src="${mainFile}" id="shs_website" allowTransparency="false" frameborder="0"></iframe>
 	<script>
-		// const websocket = new WebSocket("ws://${address}");
 		const websocket = new WebSocket("ws://" + document.location.host);
 
 		websocket.onmessage = (event) => {
@@ -18,7 +16,7 @@ export function getRefreshHandler(address: string, mainFile: string): string {
 		}
 	</script>
 	<style>
-		iframe {
+		body, iframe {
 			height: 100%;
 			width: 100%;
 			margin: 0;
