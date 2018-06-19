@@ -6,7 +6,7 @@
 		"type": "git",
 		"url": "https://github.com/7Flixs/vs_code_http_server_and_html_preview.git"
 	},
-	"version": "1.0.3",
+	"version": "2.0.0",
 	"publisher": "Flixs",
 	"icon": "assets/SHS.png",
 	"keywords": [
@@ -23,14 +23,19 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:shs.createServer"
+		"onCommand:shs.createServer",
+		"onCommand:shs.createServerWithSingleFile"
 	],
 	"main": "./out/extension",
 	"contributes": {
 		"commands": [
 			{
 				"command": "shs.createServer",
-				"title": "Simple HTTP Server: Create Simple HTTP Server"
+				"title": "Simple HTTP Server: Create HTTP Server"
+			},
+			{
+				"command": "shs.createServerWithSingleFile",
+				"title": "Simple HTTP Server: Create HTTP Server With Current File"
 			}
 		],
 		"configuration": {

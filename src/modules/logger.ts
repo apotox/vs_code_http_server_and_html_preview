@@ -18,8 +18,12 @@ export class Logger {
 
 		console.log(txt);
 
-		if (notifyUser)
-			vscode.window.showInformationMessage(txt);
+		if (notifyUser) {
+			if (postfix == "WARN")
+				vscode.window.showWarningMessage(txt);
+			else
+				vscode.window.showInformationMessage(txt);
+		}
 	}
 
 	public log(msg: string, notifyUser?: boolean): void {

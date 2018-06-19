@@ -33,7 +33,7 @@ export class WebSocket {
 	}
 
 	public notifyRefresh(): void {
-		console.log("Notifying Refresh");
+		this.logger.log("Notifying Refresh");
 
 		this.sockets.forEach((socket: ws): void => {
 			socket.send("refresh", (err: Error) => {

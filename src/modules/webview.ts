@@ -9,9 +9,15 @@ export function getRefreshHandler(mainFile: string): string {
 
 		websocket.onmessage = (event) => {
 			if (event.data == "refresh") {
-				const iframe = document.getElementById("shs_website")
+				const iframe = document.getElementById("shs_website");
 
-				iframe.src = iframe.contentWindow.location.href
+				const currScroll = iframe.contentWindow.document.scrollingElement.scrollTop;
+				
+				iframe.src = iframe.contentWindow.location.href;
+				
+				iframe.onload = _ => {
+					iframe.contentWindow.document.scrollingElement.scrollTop = currScroll;
+				}
 			}
 		}
 	</script>

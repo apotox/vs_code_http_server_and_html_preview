@@ -12,9 +12,28 @@ Other people can join you aswell, when your TCP port is forwarded, and you give 
 ## How To Use
 
 # Commands
-Press F1 and run the command ``"Simple HTTP Server: Create Simple HTTP Server"`.
+
+Press F1 and run the commands
+
+------
+
+``"Simple HTTP Server: Create HTTP Server"`
 After a HTTP Server has been created, and you can open the Website in Visual Studio Code or in your Browser, both works too!
 When editing the files they will refresh when you save the file, if other people are on your website too, it'll refresh for them aswell!
+
+When starting a HTTP Server without a single file make sure you are in the current directory with the main file, by default it is the "index.html" file.
+If this file is in the root directory of your current project you can start the HTTP Server without any problems.
+
+------
+
+``"Simple HTTP Server: Create HTTP Server With Current File"`
+This will be always the same function as the normal create HTTP Server. The difference is that you do not have to navigate into a folder.
+You can launch a single file with this command with no futher requrements.
+
+When starting a HTTP server with a single file make sure that the current file is saved on your computer, it can't be a Untitled file in Visual Studio Code.
+So just save it on your computer and it'll work!
+
+***
 
 # Settings
 
@@ -39,6 +58,8 @@ This is a example of the Visual Studio Code HTML Preview.
 This is a example of the Browser HTML Preview.
 
 ![Browser Webview](https://i.imgur.com/dKUWYI8.gif)
+
+***
 
 ## License
 
