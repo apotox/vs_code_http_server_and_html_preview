@@ -2,6 +2,9 @@
 
 This is the Changelog for the Visual Studio Code Simple HTTP Server.
 
+## [2.0.1]
+- Fixed HTTP Server not finding main file.
+
 ## [2.0.0]
 - Fixed scroll level resetting on refresh.
 - Added command "Simple HTTP Server: Create HTTP Server With Current File" to create a HTTP Server with a single file!

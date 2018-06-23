@@ -16,7 +16,7 @@ export function activate(context: vscode.ExtensionContext) {
 	const disposalCreateServer: vscode.Disposable = vscode.commands.registerCommand("shs.createServer", (): void => {
 		const mainFile: string = vscode.workspace.getConfiguration("shs").get("mainFile");
 
-		if (!existsSync(vscode.workspace.rootPath + mainFile))
+		if (!existsSync(`${vscode.workspace.rootPath}\\${mainFile}`))
 			return logger.logWarn(`Cannot find main file '${mainFile}', please make sure that you are in the correct directory!`, true);
 
 		new HTTPServer(mainFile);
