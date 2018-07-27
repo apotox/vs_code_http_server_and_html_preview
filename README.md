@@ -17,7 +17,7 @@ Press F1 and run the commands
 
 ------
 
-``"Simple HTTP Server: Create HTTP Server"`
+`"Simple HTTP Server: Create HTTP Server"`
 After a HTTP Server has been created, and you can open the Website in Visual Studio Code or in your Browser, both works too!
 When editing the files they will refresh when you save the file, if other people are on your website too, it'll refresh for them aswell!
 
@@ -26,7 +26,7 @@ If this file is in the root directory of your current project you can start the 
 
 ------
 
-``"Simple HTTP Server: Create HTTP Server With Current File"`
+`"Simple HTTP Server: Create HTTP Server With Current File"`
 This will be always the same function as the normal create HTTP Server. The difference is that you do not have to navigate into a folder.
 You can launch a single file with this command with no futher requrements.
 

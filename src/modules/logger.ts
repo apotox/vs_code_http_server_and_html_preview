@@ -1,5 +1,6 @@
 
 import * as vscode from 'vscode';
+import { Notifyer } from './notifyer';
 
 export class Logger {
 	private ExtensionName: string = "Simple HTTP Server";
@@ -9,25 +10,21 @@ export class Logger {
 		this.prefix = `[${this.ExtensionName} - ${name}]`;
 	}
 	
-	private _log(msg: string, postfix?: string, notifyUser?: boolean): void {
+	private internalLog(msg: string, type?: string, notifyUser?: boolean): void {
 		let txt: string;
-		if (!postfix)
+		if (!type)
 			txt = `${this.prefix} ${msg}`;
 		else
-			txt = `${this.prefix} [${postfix}] ${msg}`;
+			txt = `${this.prefix} [${type}] ${msg}`;
 
 		console.log(txt);
 
-		if (notifyUser) {
-			if (postfix == "WARN")
-				vscode.window.showWarningMessage(txt);
-			else
-				vscode.window.showInformationMessage(txt);
-		}
+		if (notifyUser)
+			Notifyer.addUserNotification(txt, type);
 	}
 
 	public log(msg: string, notifyUser?: boolean): void {
-		this._log(msg, null, notifyUser);
+		this.internalLog(msg, null, notifyUser);
 	}
 	
 	public logError(err: string, notifyUser?: boolean): void {
@@ -35,22 +32,22 @@ export class Logger {
 		console.error(txt);
 
 		if (notifyUser)
-			vscode.window.showErrorMessage(txt);
+			Notifyer.addUserNotification(txt, "ERROR");
 	}
 
 	public logSucess(msg: string, notifyUser?: boolean): void {
-		this._log(msg, "SUCCESS", notifyUser);
+		this.internalLog(msg, "SUCCESS", notifyUser);
 	}
 
 	public logInfo(msg: string, notifyUser?: boolean): void {
-		this._log(msg, "INFO", notifyUser);
+		this.internalLog(msg, "INFO", notifyUser);
 	}
 
 	public logDebug(msg: string, notifyUser?: boolean): void {
-		this._log(msg, "DEBUG", notifyUser);
+		this.internalLog(msg, "DEBUG", notifyUser);
 	}
 
 	public logWarn(msg: string, notifyUser?: boolean): void {
-		this._log(msg, "WARN", notifyUser);
+		this.internalLog(msg, "WARN", notifyUser);
 	}
 }

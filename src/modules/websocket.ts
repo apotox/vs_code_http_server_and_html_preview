@@ -13,19 +13,19 @@ export class WebSocket {
 	constructor(server: http.Server) {
 		this.websocket = new ws.Server({ server });
 
-		this.init();
+		this.setupConnectionHandler();
 
-		this.logger.log("Created WebSocket, listing");
+		this.logger.log("Created websocket, listing");
 	}
 
-	private init(): void {
+	private setupConnectionHandler(): void {
 		this.websocket.on("connection", (socket: ws, _, __): void => {
-			this.logger.log("Socket Connected");
+			this.logger.log("Socket connected");
 
 			this.sockets.push(socket);
 
 			socket.onclose = (): void => {
-				this.logger.log("Socket Disconnected");
+				this.logger.log("Socket disconnected");
 
 				this.sockets.splice(this.sockets.indexOf(socket), 1);
 			}
@@ -33,7 +33,7 @@ export class WebSocket {
 	}
 
 	public notifyRefresh(): void {
-		this.logger.log("Notifying Refresh");
+		this.logger.log("Notifying clients about refresh");
 
 		this.sockets.forEach((socket: ws): void => {
 			socket.send("refresh", (err: Error) => {
@@ -45,7 +45,7 @@ export class WebSocket {
 	}
 
 	public close(): void {
-		this.logger.log("Closting WebSocket");
+		this.logger.log("Closing websocket");
 
 		this.websocket.close();
 	}
