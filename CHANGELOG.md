@@ -2,6 +2,10 @@
 
 This is the Changelog for the Visual Studio HTTP Server / HTML Preview extension.
 
+## [2.1.2]
+- Updated Visual Studio Code engine to version `^1.27.0`
+- Changed GitHub repository URL
+
 ## [2.1.1]
 - Removed unused code.
 - Removed unneeded @types dependencies in production.
