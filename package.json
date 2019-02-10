@@ -1,84 +1,85 @@
 {
-	"name": "vs-code-http-server-and-html-preview",
-	"displayName": "HTTP Server / HTML Preview",
-	"description": "A Simple HTTP Server / HTML Preview for Visual Studio Code.",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/ShawnFunke/vs_code_http_server_and_html_preview.git"
-	},
-	"version": "2.1.2",
-	"publisher": "Flixs",
-	"license": "MIT",
-	"icon": "assets/SHS.png",
-	"keywords": [
-		"html viewer",
-		"http server",
-		"html preview",
-		"html live",
-		"html live refresh"
-	],
-	"engines": {
-		"vscode": "^1.27.0"
-	},
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-		"onCommand:shs.createServer",
-		"onCommand:shs.createServerWithSingleFile"
-	],
-	"main": "./out/extension",
-	"contributes": {
-		"commands": [
-			{
-				"command": "shs.createServer",
-				"title": "Simple HTTP Server: Create HTTP Server"
-			},
-			{
-				"command": "shs.createServerWithSingleFile",
-				"title": "Simple HTTP Server: Create HTTP Server With Current File"
-			}
-		],
-		"configuration": {
-			"title": "Simple HTTP Server configuration",
-			"properties": {
-				"shs.serverPort": {
-					"type": "number",
-					"default": 8080,
-					"description": "This is the port that Simple HTTP Server will be running on."
-				},
-				"shs.serverHost": {
-					"type": "string",
-					"default": "127.0.0.1",
-					"description": "This is the host that Simple HTTP Server will be running on."
-				},
-				"shs.mainFile": {
-					"type": "string",
-					"default": "index.html",
-					"description": "This is the main file that Simple HTTP Server will be using."
-				}
-			}
-		}
-	},
-	"scripts": {
-		"vscode:prepublish": "npm run compile",
-		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"postinstall": "node ./node_modules/vscode/bin/install",
-		"test": "npm run compile && node ./node_modules/vscode/bin/test"
-	},
-	"devDependencies": {
-		"typescript": "^2.6.1",
-		"vscode": "^1.1.6",
-		"tslint": "^5.8.0",
-		"@types/node": "^7.0.43",
-		"@types/mocha": "^2.2.42",
-		"@types/express": "^4.16.0",
-		"@types/ws": "^4.0.2"
-	},
-	"dependencies": {
-		"express": "^4.16.3",
-		"opn": "^5.3.0",
-		"ws": "^5.1.1"
-	}
+  "name": "vs-code-http-server-and-html-preview",
+  "displayName": "HTTP Server / HTML Preview",
+  "description": "A Simple HTTP Server / HTML Preview for Visual Studio Code.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ShawnFunke/vs_code_http_server_and_html_preview.git"
+  },
+  "version": "2.2.2",
+  "publisher": "Flixs",
+  "license": "MIT",
+  "icon": "assets/SHS.png",
+  "keywords": [
+    "html viewer",
+    "http server",
+    "html preview",
+    "html live",
+    "html live refresh"
+  ],
+  "engines": {
+    "vscode": "^1.27.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:shs.createServer",
+    "onCommand:shs.createServerWithSingleFile"
+  ],
+  "main": "./out/extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "shs.createServer",
+        "title": "Simple HTTP Server: Create HTTP Server"
+      },
+      {
+        "command": "shs.createServerWithSingleFile",
+        "title": "Simple HTTP Server: Create HTTP Server With Current File"
+      }
+    ],
+    "configuration": {
+      "title": "Simple HTTP Server configuration",
+      "properties": {
+        "shs.serverPort": {
+          "type": "number",
+          "default": 8080,
+          "description": "This is the port that Simple HTTP Server will be running on."
+        },
+        "shs.serverHost": {
+          "type": "string",
+          "default": "127.0.0.1",
+          "description": "This is the host that Simple HTTP Server will be running on."
+        },
+        "shs.mainFile": {
+          "type": "string",
+          "default": "index.html",
+          "description": "This is the main file that Simple HTTP Server will be using."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "npm run compile && node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "@types/express": "^4.16.0",
+    "@types/mocha": "^2.2.42",
+    "@types/node": "^7.0.43",
+    "@types/ws": "^4.0.2",
+    "tslint": "^5.8.0",
+    "typescript": "^2.6.1",
+    "vscode": "^1.1.6"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "is-root": "^2.0.0",
+    "opn": "^5.3.0",
+    "ws": "^5.1.1"
+  }
 }

@@ -2,17 +2,20 @@
 import * as vscode from 'vscode';
 
 export class Notifyer {
-	public static addUserNotification(txt: string, type?: string): void {
+
+	public static addUserNotification(text: string, type?: string): void {
 		const window = vscode.window;
+
 		switch (type) {
 			case "WARN":
-				window.showWarningMessage(txt);
+				window.showWarningMessage(text);
 				break;
 			case "ERROR":
-				window.showErrorMessage(txt);
+				window.showErrorMessage(text);
 				break;
 			default:
-				window.showInformationMessage(txt);
+				window.showInformationMessage(text);
 		}
 	}
+
 }

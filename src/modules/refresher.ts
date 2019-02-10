@@ -1,5 +1,6 @@
 
 export class Refresher {
+
 	public static getRefreshHandler(mainFile: string): string {
 		return `
 		<iframe src="${mainFile}" id="shs_website" allowTransparency="false" frameborder="0"></iframe>
@@ -30,4 +31,5 @@ export class Refresher {
 		</style>
 		`;
 	}
+
 }

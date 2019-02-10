@@ -2,6 +2,11 @@
 
 This is the Changelog for the Visual Studio HTTP Server / HTML Preview extension.
 
+## [2.2.2]
+- Fixed bug where paths couldn't be resolved on all OS's.
+- Improved code.
+- Added permission checks for non Windows OS's when trying to run a port below 1024.
+
 ## [2.1.2]
 - Updated Visual Studio Code engine to version `^1.27.0`
 - Changed GitHub repository URL

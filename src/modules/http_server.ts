@@ -3,32 +3,34 @@ import * as express from "express";
 import * as vscode from 'vscode';
 import * as http from 'http';
 import * as opn from "opn";
+import * as isRoot from "is-root";
 
 import { Webview } from '../modules/webview';
 import { WebSocket } from './websocket';
 import { Logger } from "./logger";
 import { Refresher } from "./refresher";
 
-const APP: express.Express = express();
+const app = express();
 
 export class HTTPServer {
-	private logger: Logger = new Logger("HTTP-Server");
+
+	private readonly logger = new Logger("HTTP-Server");
+
 	private httpServer: http.Server;
 	private websocket: WebSocket;
 	private mainFile: string;
 
 	constructor() {
-		this.setupApp();
-	}
+		const path = vscode.workspace.rootPath;
+		app.use("/", (request, response) => {
+			let url: string = decodeURI(request.originalUrl);
+			if (url == "/") {
+				response.send(Refresher.getRefreshHandler(this.mainFile));
 
-	private setupApp(): void {
-		const path: string = vscode.workspace.rootPath;
-		APP.use("/", (req, res: express.Response, _) => {
-			let url: string = decodeURI(req.originalUrl);
-			if (url == "/")
-				return res.send(Refresher.getRefreshHandler(this.mainFile));
+				return;
+			}
 
-			res.sendFile(path + url)
+			response.sendFile(path + url);
 		});
 	}
 
@@ -37,21 +39,27 @@ export class HTTPServer {
 
 		this.setupServer();
 
-		this.websocket = new WebSocket(this.httpServer);
+		if (this.httpServer)
+			this.websocket = new WebSocket(this.httpServer);
 	}
 
 	private setupServer(): void {
+		const config = vscode.workspace.getConfiguration("shs");
+		const port: number = config.get("serverPort");
+		const host: string = config.get("serverHost");
+
+		if (process.platform !== "win32" && port < 1024 && !isRoot()) {
+			this.logger.logWarn("You need sudo permissions to run ports below '1024'", true);
+
+			return;
+		}
+
 		if (this.httpServer)
 			this.httpServer.close();
 
-		this.httpServer = http.createServer(APP);
+		this.httpServer = http.createServer(app);
 
-		const config: vscode.WorkspaceConfiguration = vscode.workspace.getConfiguration("shs");
-		const serverPort: number = config.get("serverPort");
-		const serverHost: string = config.get("serverHost");
-		this.httpServer.listen(serverPort, serverHost, (): void => {
-			this.onHTTPServerListening(`${serverHost}:${serverPort}`);
-		});
+		this.httpServer.listen(port, host, () => this.onHTTPServerListening(`${host}:${port}`));
 	}
 
 	public refresh(): void {
@@ -59,18 +67,19 @@ export class HTTPServer {
 	}
 
 	private onHTTPServerListening(address: string): void {
-		address = address == "0.0.0.0" ? "127.0.0.1" : address
+		address = address === "0.0.0.0" ? "127.0.0.1" : address
 
 		this.logger.logSucess(`Server listening on '${address}'`);
 
 		vscode.window.showInformationMessage(`Simple HTTP Server running on '${address}'`, "Open in Browser", "Open in Visual Studio")
-		.then((option: string): void => {
-			if (option) {
+			.then(option => {
+				if (!option) return;
+
 				if (option == "Open in Browser")
 					opn("http://" + address);
 				else if (option == "Open in Visual Studio")
 					Webview.showWebsite(address);
-			}
 		});
 	}
+
 }
